@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.adminview.ims.dao.security.LoginMapper">
+
+	<!-- 获取登录用户 -->
+	<select id="login" resultType="map" parameterType="map">
+
+		SELECT
+		ID, DEPARTID, DEPARTNAME, USERNAME, NAME, PHONE, EMAIL, REMARKS,
+		TO_CHAR(CREATETIME,'yyyy-MM-dd HH24:mi:ss') CREATETIME, ENABLED
+		FROM BASE_USER
+		WHERE 1 = 1
+		AND USERNAME=#{username}
+		AND PASSWORD=#{md5Psw}
+		AND ROWNUM=1
+	</select>
+	<select id="queryDefaultPasswordFlag" parameterType="map" resultType="int">
+		SELECT count(1) FROM BASE_USER
+		WHERE ID=#{id} AND PASSWORD=#{newPsw}
+		  
+	</select>
+	
+	<!-- 获取用户权限 -->
+	<select id="queryAllRolePrivilege" resultType="map" parameterType="map">
+		SELECT DISTINCT T1.*
+		FROM BASE_PRIVILEGE T1
+		ORDER BY T1.PTYPE ASC,T1.PID ASC,T1.ORDERBY ASC
+	</select>
+	<!-- 获取用户权限 -->
+	<select id="queryRolePrivilege" resultType="map" parameterType="map">
+		SELECT DISTINCT T1.*
+		FROM BASE_PRIVILEGE T1
+		INNER JOIN BASE_ROLE_PRIVILEGE RP ON T1.ID=RP.PRIVILEGE
+		INNER JOIN BASE_ROLE_USER RU ON RP.ROLE=RU.ROLE
+		INNER JOIN BASE_USER U ON RU.USERID=U.ID
+		WHERE U.ID=#{ID}
+		ORDER BY T1.PTYPE ASC,T1.PID ASC,T1.ORDERBY ASC
+	</select>
+
+	<select id="getOldPassword" resultType="string" parameterType="map">
+		SELECT PASSWORD FROM BASE_USER WHERE ID=#{id}
+	</select>
+	<update id="updatePassword" parameterType="map">
+		UPDATE BASE_USER
+		SET
+		PASSWORD=#{newPsw}
+		WHERE ID=#{id}
+	</update>
+
+
+	<select id="getUser" resultType="map" parameterType="map">
+		SELECT *
+		FROM BASE_USER WHERE ID=#{id}
+	</select>
+</mapper>

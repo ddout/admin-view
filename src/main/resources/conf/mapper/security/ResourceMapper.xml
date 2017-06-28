@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.adminview.ims.dao.security.ResourceMapper">
+<!-- 资源类型操作》开始 -->
+	<sql id="list_where">
+		<if test="search_key!=null and search_key!=''">
+			AND
+			(
+				T1.NAME LIKE CONCAT(CONCAT('%', #{search_key}), '%')
+				OR
+				T1.CODE LIKE CONCAT(CONCAT('%', #{search_key}), '%')
+			)	
+		</if>
+	</sql>
+	<!-- 查询资源类型中是否有资源项目 -->
+	<select id="hasItems" resultType="int" parameterType="map">
+
+		SELECT COUNT(*) FROM BASE_DICT_TYPE T WHERE 1 = 1
+		AND T.ID IN
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		AND EXISTS (SELECT 1 FROM BASE_DICT_ITEM T2 WHERE T2.PID=T.ID)
+
+	</select>
+
+	<!-- 查询分页总条数 -->
+	<select id="listTypeCount" resultType="int" parameterType="map">
+
+		SELECT COUNT(*) FROM BASE_DICT_TYPE T1
+		WHERE 1 = 1
+		<include refid="list_where"></include>
+
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="listType" resultType="map" parameterType="map">
+
+		select * from (select ROWNUM RN, T.* from(select *FROM BASE_DICT_TYPE T1
+		WHERE 1 = 1
+		<include refid="list_where"></include>
+		) T WHERE 1=1
+		) WHERE 1=1
+		<if test="end !=null and end !=''">
+			AND RN &lt;= #{end}
+		</if>
+		<if test="start !=null and start !=''">
+			AND RN &gt;= #{start}
+		</if>
+
+	</select>
+
+	<!-- 根据ID获取信息 （资源类型）-->
+	<select id="getTypeById" resultType="map" parameterType="map">
+		SELECT ID,NAME,CODE
+		FROM BASE_DICT_TYPE T WHERE ID=#{id}
+	</select>
+
+	<!-- 增加资源类型-->
+	<insert id="addType" parameterType="map">
+		<selectKey keyProperty="id" resultType="string" order="BEFORE">
+			SELECT SYS_GUID() FROM DUAL
+		</selectKey>
+		INSERT INTO BASE_DICT_TYPE (
+		ID,NAME,CODE
+		)
+		VALUES (
+		#{id},
+		#{name},
+		#{code}
+		)
+	</insert>
+
+	<!-- 删除资源类型-->
+	<delete id="deleteTypeByIds" parameterType="map">
+		DELETE BASE_DICT_TYPE T WHERE
+		T.ID IN
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!-- 修改资源类型-->
+	<update id="updateType" parameterType="map">
+		UPDATE BASE_DICT_TYPE SET
+		NAME=#{name},
+		CODE=#{code}
+		where ID = #{id}
+	</update>
+<!-- 资源类型操作》结束 -->
+	
+<!-- 资源项目操作》开始 -->
+	<sql id="list_where1">
+		<if test="search_key1!=null and search_key1!=''">
+			AND 
+			(
+				T1.NAME LIKE CONCAT(CONCAT('%', #{search_key1}), '%')
+				OR
+				T1.CODE LIKE CONCAT(CONCAT('%', #{search_key1}), '%')
+				OR
+				T1.VAL LIKE CONCAT(CONCAT('%', #{search_key1}), '%')
+			)	
+		</if>
+	</sql>
+	<!-- 查询分页总条数 -->
+	<select id="listItemsCount" resultType="int" parameterType="map">
+
+		SELECT COUNT(*) FROM BASE_DICT_ITEM T1
+		WHERE PID=#{pid}
+		<include refid="list_where1"></include>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listItems" resultType="map" parameterType="map">
+		select * from (select ROWNUM RN, T.* from(select *FROM BASE_DICT_ITEM T1
+		WHERE PID=#{pid} 
+		<include refid="list_where1"></include>
+		ORDER BY BYORDER
+		) T WHERE 1=1
+		) WHERE 1=1
+		<if test="end !=null and end !=''">
+			AND RN &lt;= #{end}
+		</if>
+		<if test="start !=null and start !=''">
+			AND RN &gt;= #{start}
+		</if>
+	</select>
+	
+	<!-- 根据ID获取信息 （资源项目）-->
+	<select id="getItemsById" resultType="map" parameterType="map">
+		SELECT ID,NAME,CODE,PID,CODE,VAL,BYORDER,MASK
+		FROM BASE_DICT_ITEM T WHERE ID=#{id}
+	</select>
+	
+	<!-- 增加资源项目-->
+	<insert id="addItems" parameterType="map">
+		<selectKey keyProperty="id" resultType="string" order="BEFORE">
+			SELECT SYS_GUID() FROM DUAL
+		</selectKey>
+		INSERT INTO BASE_DICT_ITEM (
+		ID,NAME,PID,CODE,VAL,BYORDER,MASK
+		)
+		VALUES (
+		#{id},
+		#{name},
+		#{pid},
+		#{code},
+		#{val},
+		#{byorder},
+		#{mask}
+		)
+	</insert>
+	
+	<!-- 删除资源项目-->
+	<delete id="deleteItemsByIds" parameterType="map">
+		DELETE BASE_DICT_ITEM T WHERE
+		T.ID IN
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 修改资源项目-->
+	<update id="updateItems" parameterType="map">
+		UPDATE BASE_DICT_ITEM SET 
+		NAME=#{name},
+		CODE=#{code},
+		VAL=#{val},
+		BYORDER=#{byorder},
+		MASK=#{mask}
+		where ID = #{id}
+	</update>
+	
+	
+</mapper>

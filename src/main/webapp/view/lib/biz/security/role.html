@@ -1,0 +1,70 @@
+<div class="col-md-12">
+	<div class="portlet light ">
+		<div class="portlet-title">
+			<div class="caption font-dark">
+				<i class="icon-settings font-dark"></i> <span
+					class="caption-subject bold uppercase"> 角色管理 </span>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="row search-form-params">
+				<form id="search-form" method="post" class="form-inline">
+				    <div class="form-group">
+					     <div class="input-group">
+					    	<div class="input-group-addon">名称</div>
+					      	<input type="text" class="form-control" name="name" placeholder="名称">
+					     </div>
+					 </div>
+					 <button type="submit" class="btn btn-primary">
+					 	<i class="glyphicon glyphicon-search icon-chevron-down"></i> 查询
+					 </button>
+				</form>
+			</div>
+			<div class="dataTables_wrapper no-footer">
+				<!--  -->
+				<div class="search-toolbar columns columns-left btn-group pull-left">
+				    <button id="btn-new"  class="btn btn-primary btn-sm" type="button" name="paginationSwitch" aria-label="pagination Switch" title="新增">
+				    	<i class="glyphicon glyphicon-plus icon-chevron-down"></i> 新增
+				    </button>
+				    <button id="ajax-demo"  class="btn btn-primary btn-sm" type="button" name="paginationSwitch" aria-label="pagination Switch" title="新增">
+				    	<i class="glyphicon glyphicon-indent-right icon-chevron-down"></i> 配置功能
+				    </button>
+				</div>
+				<!--  -->		
+				<table id="paginationTable"></table>
+				<!--  -->
+			</div>
+	</div>
+  </div>
+</div>
+
+<!-- 模态正文 角色》》功能  开始 -->
+<div aria-hidden="true" id="ajax-modal" class="modal fade" tabIndex="-1" 
+	role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-primary">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h5 class="modal-title">
+                    <i class="icon-pencil"></i>
+                    <span id="lblAddTitle" style="font-weight:bold">配置功能</span>
+                </h5>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+                       	<div id="treeDemo" class="ztree" style="overflow-y:scroll;height: 500px">  
+            			</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn default" data-dismiss="modal"> 返 回 </button>
+				<button type="button" class="btn btn-primary" id="savePri"> 保 存 </button>
+				<input type="hidden" name="roleId"/>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 模态正文 角色》》功能  结束 -->

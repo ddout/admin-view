@@ -1,0 +1,190 @@
+<div class="col-md-12">
+	<div class="col-md-5">
+		<div class="portlet light ">
+			<div class="portlet-title">
+				<div class="caption font-dark">
+					<i class="icon-settings font-dark"></i> <span class="caption-subject bold uppercase">资源类型</span>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row search-form-params">
+					<form id="search_form_1" method="post" class="form-inline">
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">搜索</div>
+								<input type="text" class="form-control" name="search_key" placeholder="搜索">
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">
+					 	<i class="glyphicon glyphicon-search icon-chevron-down"></i> 查询
+					 </button>
+					</form>
+				</div>
+				<div class="dataTables_wrapper no-footer">
+					<!--  -->
+					<div id="search_toolbar_1" class="search-toolbar columns columns-left btn-group pull-left">
+						<button id="btn_add_1" class="btn btn-primary btn-sm" type="button" name="paginationSwitch" aria-label="pagination Switch" title="新增">
+				    	<i class="glyphicon glyphicon-plus icon-chevron-down"></i> 新增
+				    </button>
+					</div>
+					<!--  -->
+					<table id="paginationTable_1"></table>
+					<!--  -->
+				</div>
+			</div>
+			<!---->
+		</div>
+	</div>
+	<!---->
+	<div class="col-md-7">
+		<div class="portlet light ">
+			<div class="portlet-title">
+				<div class="caption font-dark">
+					<i class="icon-settings font-dark"></i> <span class="caption-subject bold uppercase">资源项目</span>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row search-form-params">
+					<form id="search_form_2" method="post" class="form-inline">
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">搜索</div>
+								<input type="text" class="form-control" name="search_key1" placeholder="搜索">
+								<input type="hidden" id="sourceTypeId" name="pid" value="-1" />
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">
+					 	<i class="glyphicon glyphicon-search icon-chevron-down"></i> 查询
+					 </button>
+					</form>
+				</div>
+				<div class="dataTables_wrapper no-footer">
+					<!--  -->
+					<div id="search_toolbar_2" class="search-toolbar columns columns-left btn-group pull-left">
+						<button id="btn_add_2" class="btn btn-primary btn-sm" type="button" name="paginationSwitch" aria-label="pagination Switch" title="新增">
+				    		<i class="glyphicon glyphicon-plus icon-chevron-down"></i> 新增
+				    	</button>
+				    	<span style="padding-left:10px;">资源类型:<label id="resource_type_2" style="color:red;padding-left:5px;">未选择</label></span>
+					</div>
+					<!--  -->
+					<table id="paginationTable_2"></table>
+					<!--  -->
+				</div>
+			</div>
+			<!---->
+		</div>
+	</div>
+</div>
+
+<!-- 资源类型模态框》开始 -->
+<div aria-hidden="true" id="ajax-modal-1" class="modal fade" tabIndex="-1" role="dialog">
+	<div class="modal-dialog">
+		<form method="post" class="form-horizontal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="caption">
+						<i class="icon-settings font-red"></i> <span class="caption-subject font-red sbold uppercase">资源类型</span>
+					</div>
+				</div>
+				<div class="modal-body" style="height: 200px;overflow-y: auto;">
+
+					<div class="form-body">
+						<input type="hidden" name="id" data-required="1" class="form-control" />
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								名称 <span class="required"> * </span>
+							</label>
+							<div class="col-md-6">
+								<input type="text" name="name" data-required="1" class="form-control" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								编码 <span class="required"> * </span>
+							</label>
+							<div class="col-md-6">
+								<input name="code" type="text" class="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal"> 返 回 </button>
+					<button type="submit" class="btn btn-primary" id="save"> 保 存 </button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 资源类型模态框 》结束-->
+
+<!-- 资源详情模态框 》开始-->
+<div aria-hidden="true" id="ajax-modal-2" class="modal fade" tabIndex="-1" role="dialog">
+	<div class="modal-dialog">
+		<form method="post" class="form-horizontal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="caption">
+						<i class="icon-settings font-red"></i> <span class="caption-subject font-red sbold uppercase">资源项目</span>
+					</div>
+				</div>
+				<div class="modal-body"  style="height: 300px;overflow-y: auto;">
+					<div class="form-body">
+						<input type="hidden" name="id" data-required="1" class="form-control" />
+
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								名称 <span class="required"> * </span>
+							</label>
+							<div class="col-md-6">
+								<input type="text" name="name" data-required="1" class="form-control" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								代码 <span class="required"> * </span>
+							</label>
+							<div class="col-md-6">
+								<input name="code" type="text" class="form-control" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								值<span class="required"> * </span>
+							</label>
+							<div class="col-md-6">
+								<input name="val" type="text" class="form-control" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								排序<span class="required"> * </span>
+							</label>
+							<div class="col-md-6">
+								<input name="byorder" type="text" class="form-control" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">
+								说明<span class="required"></span>
+							</label>
+							<div class="col-md-6">
+								<input name="mask" type="text" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal"> 返 回 </button>
+					<button type="submit" class="btn btn-primary"> 保 存 </button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 资源详情模态框 》结束-->

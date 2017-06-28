@@ -1,0 +1,107 @@
+<div class="col-md-12">
+	<div class="portlet light ">
+		<div class="portlet-title">
+			<div class="caption font-dark">
+				<i class="icon-settings font-dark"></i> <span class="caption-subject bold uppercase"> 用户管理 </span>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="row search-form-params">
+				<form id="search-form" method="post" class="form-inline">
+				    <div class="form-group">
+					     <div class="input-group">
+					    	<div class="input-group-addon">登录账户</div>
+					      	<input type="text" class="form-control" name="seach_key" placeholder="登录账户">
+					     </div>
+					 </div>
+					 <button type="submit" class="btn btn-primary">
+					 	<i class="glyphicon glyphicon-search icon-chevron-down"></i> 查询
+					 </button>
+				</form>
+			</div>
+			<div class="dataTables_wrapper no-footer">
+				<!--  -->
+				<div class="search-toolbar columns columns-left btn-group pull-left">
+				    <button id="btn-new" class="btn btn-primary btn-sm" type="button" name="paginationSwitch" aria-label="pagination Switch" title="新增">
+				    	<i class="glyphicon glyphicon-plus icon-chevron-down"></i> 新增
+				    </button>
+				    <button id="btn-start" class="btn btn-primary btn-sm" type="button" name="paginationSwitch" aria-label="pagination Switch" title="启用">
+				    	<i class="glyphicon glyphicon-ok-circle icon-chevron-down"></i> 启用
+				    </button>
+				    <button id="btn-del" class="btn btn-primary btn-sm" type="button" name="paginationSwitch" aria-label="pagination Switch" title="禁用">
+				    	<i class="glyphicon glyphicon-ban-circle icon-chevron-down"></i> 禁用
+				    </button>
+				    <button id="showrole" class="btn btn-primary btn-sm" type="button" name="paginationSwitch" aria-label="pagination Switch" title="设置角色">
+				    	<i class="glyphicon glyphicon-user icon-chevron-down"></i> 设置角色
+				    </button>
+				    <button id="showdepart" class="btn btn-primary btn-sm" type="button" name="paginationSwitch" aria-label="pagination Switch" title="数据权限">
+				    	<i class="glyphicon glyphicon-th-list icon-chevron-down"></i> 数据权限
+				    </button>
+				</div>
+				<!--  -->		
+				<table id="paginationTable"></table>
+				<!--  -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<div aria-hidden="true" id="ajax-modal" class="modal fade" tabIndex="-1"
+	role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-primary">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h5 class="modal-title">
+                    <i class="icon-pencil"></i>
+                    <span id="lblAddTitle" style="font-weight:bold">设置角色</span>
+                </h5>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet-body">
+							<div id="tree_2" class="ztree" style="overflow-y:scroll;height: 500px"></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal">返回</button>
+					<button type="button" class="btn btn-primary" id="save-role">保存</button>
+					<input type="hidden" name="userid"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div aria-hidden="true" id="ajax-modal1" class="modal fade" tabIndex="-1"
+	role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-primary">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				 <h5 class="modal-title">
+                    <i class="icon-pencil"></i>
+                    <span id="lblAddTitle" style="font-weight:bold">设置数据权限</span>
+                </h5>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet-body">
+							<div id="tree_3" class="ztree" style="overflow-y:scroll;height: 500px"></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal">返回</button>
+					<button type="button" class="btn btn-primary" id="save-depart">保存</button>
+					<input type="hidden" name="userid"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
